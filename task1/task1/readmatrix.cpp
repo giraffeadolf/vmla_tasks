@@ -5,14 +5,14 @@
 #include "readmatrix.h"
 
 
-int **allocate_matrix(int height, int width) {
-	int** result = (int**)calloc(height, sizeof(int*));
+double **allocate_matrix(int height, int width) {
+	double** result = (double**)calloc(height, sizeof(double*));
 	if (!result) {
 		printf("error");
 		return NULL;
 	}
 	for (int i = 0; i < height; i++) {
-		result[i] = (int*)malloc(sizeof(int) * width);
+		result[i] = (double*)malloc(sizeof(double) * width);
 		if (!result[i]) {
 			printf("error");
 			free_matrix(result, height);
@@ -22,7 +22,7 @@ int **allocate_matrix(int height, int width) {
 	return result;
 }
 
-void free_matrix(int** matrix, int height) {
+void free_matrix(double** matrix, int height) {
 	for (int i = 0; i < height; i++) {
 		if (matrix[i]) {
 			free(matrix[i]);
@@ -31,8 +31,8 @@ void free_matrix(int** matrix, int height) {
 	free(matrix);
 }
 
-int **read_matrix(int height, int width, FILE *input) {
-	int** matrix = allocate_matrix(height, width);
+double **read_matrix(int height, int width, FILE *input) {
+	double** matrix = allocate_matrix(height, width);
 	if (!matrix) {
 		printf("error");
 		return NULL;
@@ -44,7 +44,7 @@ int **read_matrix(int height, int width, FILE *input) {
 			//	printf("error");
 			//	return NULL;
 			//}
-			fscanf(input, "%d", &matrix[i][j]);
+			fscanf(input, "%lf", &matrix[i][j]);
 		}
 	}
 	return matrix;

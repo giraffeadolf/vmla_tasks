@@ -138,10 +138,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gauss.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="readmatrix.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gauss.h" />
     <ClInclude Include="readmatrix.h" />
   </ItemGroup>
   <ItemGroup>

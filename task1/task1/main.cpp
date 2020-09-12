@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "readmatrix.h"
+#include "gauss.h"
 
 int main() {
 
@@ -15,15 +16,17 @@ int main() {
 	int width;
 	fscanf(input, "%d %d", &height, &width);
 
-	int **matrix = read_matrix(height, width, input);
+	double **matrix = read_matrix(height, width, input);
 	if (!matrix) {
 		printf("error");
 		return 1;
 	}
 
+	upper_triangle(matrix, height, width);
+
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			printf("%d ", matrix[i][j]);
+			printf("%lf ", matrix[i][j]);
 		}
 		printf("\n");
 	}

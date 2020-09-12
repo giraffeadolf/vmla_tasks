@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <io.h>
 
-int** allocate_matrix(int height, int width);
+double** allocate_matrix(int height, int width);
 
-void free_matrix(int** matrix, int height);
+void free_matrix(double** matrix, int height);
 
-int** read_matrix(int height, int width, FILE* input);
+double** read_matrix(int height, int width, FILE* input);
