@@ -140,11 +140,11 @@
   <ItemGroup>
     <ClCompile Include="gauss.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="readmatrix.cpp" />
+    <ClCompile Include="read_matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gauss.h" />
-    <ClInclude Include="readmatrix.h" />
+    <ClInclude Include="read_matrix.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

@@ -13,17 +13,24 @@ int main() {
 		return NULL;
 	}
 
-	int height;
-	int width;
+	int height, width;
 	fscanf(input, "%d %d", &height, &width);
 
 	double **matrix = read_matrix(height, width, input);
+	fclose(input);
+
 	if (!matrix) {
 		printf("Can't read matrix.");
 		return 1;
 	}
 
-	upper_triangle(matrix, height, width);
+	matrix = upper_triangle(matrix, height, width);
+	double* solution = express(matrix, height, width);
+
+	if (!solution)
+	{
+		return 0;
+	}
 
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
@@ -32,9 +39,13 @@ int main() {
 		printf("\n");
 	}
 
-	fclose(input);
+	for (int i = 0; i < height; i++)
+	{
+		printf("%lf\n", solution[i]);
+	}
 
 	free_matrix(matrix, height);
+	free(solution);
 
 	return 0;
 }

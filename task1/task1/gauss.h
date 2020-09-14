@@ -4,3 +4,5 @@
 #include <stdio.h>
 
 double** upper_triangle(double** matrix, int height, int width);
+
+double* express(double** matrix, int height, int width);

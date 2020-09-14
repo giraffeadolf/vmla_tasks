@@ -7,18 +7,22 @@
 
 double **allocate_matrix(int height, int width) {
 	double** result = (double**)calloc(height, sizeof(double*));
+
 	if (!result) {
 		printf("Can't allocate memory for matrix rows.");
 		return NULL;
 	}
+
 	for (int i = 0; i < height; i++) {
 		result[i] = (double*)malloc(sizeof(double) * width);
+
 		if (!result[i]) {
 			printf("Can't allocate memory for matrix row.");
 			free_matrix(result, height);
 			return NULL;
 		}
 	}
+
 	return result;
 }
 
@@ -28,6 +32,7 @@ void free_matrix(double** matrix, int height) {
 			free(matrix[i]);
 		}
 	}
+
 	free(matrix);
 }
 

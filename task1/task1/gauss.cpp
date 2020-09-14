@@ -35,11 +35,10 @@ void sum_rows(double** matrix, int width, int n, int m) {
 
 double** upper_triangle(double** matrix, int height, int width) {
 	for (int i = 0; i < height; i++) {
-		if (!matrix[i][i]) {
-			if (search_nonzero(matrix, height, i)) {
-				continue;
-			}
+		if (!matrix[i][i] && search_nonzero(matrix, height, i)) {
+			continue;
 		}
+
 		for (int j = i + 1; j < width -	1; j++) {
 			if (!matrix[j][i]) {
 				continue;
@@ -49,5 +48,46 @@ double** upper_triangle(double** matrix, int height, int width) {
 			sum_rows(matrix, width, j, i);
 		}
 	}
+
 	return matrix;
+}
+
+
+double* express(double** matrix, int height, int width)
+{
+	double* solution = (double*)malloc((width - 1) * sizeof(double));
+	double value;
+
+	if (!solution)
+	{
+		printf("Can't allocate memory for solution");
+		return NULL;
+	}
+
+	// guess that height == width - 1
+
+	for (int i = height - 1; i >= 0; i--)
+	{
+		if (matrix[i][i] != 0)
+		{
+			value = matrix[i][width - 1];
+
+			for (int j = i + 1; j < width - 1; j++)
+			{
+				value -= matrix[i][j] * solution[j];
+			}
+
+			solution[i] = value / matrix[i][i];
+		}
+		else
+		{
+			printf("Can't solve (more than 1 solution or 0).");
+			free(solution);
+			
+			return NULL;
+		}
+
+	}
+
+	return solution;
 }
