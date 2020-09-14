@@ -1,13 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include "readmatrix.h"
+
+#include "read_matrix.h"
 #include "gauss.h"
 
 int main() {
 
 	FILE* input = fopen("input.txt", "r");
-	if (input == NULL) {
+	if (!input) {
 		printf("Can't open file");
 		return NULL;
 	}
@@ -18,7 +19,7 @@ int main() {
 
 	double **matrix = read_matrix(height, width, input);
 	if (!matrix) {
-		printf("error");
+		printf("Can't read matrix.");
 		return 1;
 	}
 
