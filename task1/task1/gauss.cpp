@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap_rows(double** matrix, int n, int m) {
+void swap_rows(double** matrix, size_t n, size_t m) {
 	double* buffer = matrix[n];
 	matrix[n] = matrix[m];
 	matrix[m] = buffer;
 }
 
-int search_nonzero(double** matrix, int height, int n) {
-	for (int i = n + 1; i < height; i++) {
+int search_nonzero(double** matrix, size_t height, size_t n) {
+	for (size_t i = n + 1; i < height; i++) {
 		if (matrix[i][n]) {
 			swap_rows(matrix, n, i);
 			return 0;
@@ -20,26 +20,26 @@ int search_nonzero(double** matrix, int height, int n) {
 	return 1;
 }
 
-void multiple_row_by_number(double **matrix, int width, int row, double num) {
+void multiple_row_by_number(double **matrix, size_t width, size_t row, double num) {
 	for (int i = 0; i < width; i++) {
 		matrix[row][i] *= num;
 	}
 }
 
 // прибавляет строку с номером n к строке с номером m
-void sum_rows(double** matrix, int width, int n, int m) {
-	for (int i = 0; i < width; i++) {
+void sum_rows(double** matrix, size_t width, size_t n, size_t m) {
+	for (size_t i = 0; i < width; i++) {
 		matrix[n][i] += matrix[m][i];
 	}
 }
 
-double** upper_triangle(double** matrix, int height, int width) {
-	for (int i = 0; i < height; i++) {
+double** upper_triangle(double** matrix, size_t height, size_t width) {
+	for (size_t i = 0; i < height; i++) {
 		if (!matrix[i][i] && search_nonzero(matrix, height, i)) {
 			continue;
 		}
 
-		for (int j = i + 1; j < width -	1; j++) {
+		for (size_t j = i + 1; j < width -	1; j++) {
 			if (!matrix[j][i]) {
 				continue;
 			}
@@ -53,7 +53,7 @@ double** upper_triangle(double** matrix, int height, int width) {
 }
 
 
-double* express(double** matrix, int height, int width)
+double* express_variables(double** matrix, size_t height, size_t width)
 {
 	double* solution = (double*)malloc((width - 1) * sizeof(double));
 	double value;
@@ -72,7 +72,7 @@ double* express(double** matrix, int height, int width)
 		{
 			value = matrix[i][width - 1];
 
-			for (int j = i + 1; j < width - 1; j++)
+			for (size_t j = i + 1; j < width - 1; j++)
 			{
 				value -= matrix[i][j] * solution[j];
 			}

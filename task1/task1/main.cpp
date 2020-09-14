@@ -13,8 +13,15 @@ int main() {
 		return NULL;
 	}
 
-	int height, width;
-	fscanf(input, "%d %d", &height, &width);
+	size_t height, width;
+	fscanf(input, "%zd %zd", &height, &width);
+	printf("%zd %zd", height, width);
+	
+	if (height != width - 1)
+	{
+		printf("Can't solve this.");
+		return 0;
+	}
 
 	double **matrix = read_matrix(height, width, input);
 	fclose(input);
@@ -25,21 +32,21 @@ int main() {
 	}
 
 	matrix = upper_triangle(matrix, height, width);
-	double* solution = express(matrix, height, width);
+	double *solution = express_variables(matrix, height, width);
 
 	if (!solution)
 	{
 		return 0;
 	}
 
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
+	for (size_t i = 0; i < height; i++) {
+		for (size_t j = 0; j < width; j++) {
 			printf("%lf ", matrix[i][j]);
 		}
 		printf("\n");
 	}
 
-	for (int i = 0; i < height; i++)
+	for (size_t i = 0; i < height; i++)
 	{
 		printf("%lf\n", solution[i]);
 	}

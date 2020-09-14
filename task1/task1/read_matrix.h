@@ -1,10 +1,9 @@
 #pragma once
 
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-double** allocate_matrix(int height, int width);
+double** allocate_matrix(size_t height, size_t width);
 
-void free_matrix(double** matrix, int height);
+void free_matrix(double** matrix, size_t height);
 
-double** read_matrix(int height, int width, FILE* input);
+double** read_matrix(size_t height, size_t width, FILE* input);

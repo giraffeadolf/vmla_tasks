@@ -1,8 +1,8 @@
 #pragma once
 
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-double** upper_triangle(double** matrix, int height, int width);
+double** upper_triangle(double** matrix, size_t height, size_t width);
 
-double* express(double** matrix, int height, int width);
+double* express_variables(double** matrix, size_t height, size_t width);
+
