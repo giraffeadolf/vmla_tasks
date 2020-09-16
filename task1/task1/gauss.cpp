@@ -16,7 +16,6 @@ int search_nonzero(double** matrix, size_t height, size_t n) {
 		}
 	}
 
-	printf("all 0");
 	return 1;
 }
 
@@ -60,7 +59,7 @@ double* express_variables(double** matrix, size_t height, size_t width)
 
 	if (!solution)
 	{
-		printf("Can't allocate memory for solution");
+		printf("Can't allocate memory for solution\n");
 		return NULL;
 	}
 
@@ -81,7 +80,7 @@ double* express_variables(double** matrix, size_t height, size_t width)
 		}
 		else
 		{
-			printf("Can't solve (more than 1 solution or 0).");
+			printf("Can't solve (more than 1 solution or 0).\n");
 			free(solution);
 			
 			return NULL;

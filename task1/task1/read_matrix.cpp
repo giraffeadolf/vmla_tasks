@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <io.h>
+#include <math.h>
 #include "read_matrix.h"
-
 
 double **allocate_matrix(size_t height, size_t width) {
 	double** result = (double**)calloc(height, sizeof(double*));
@@ -17,7 +17,7 @@ double **allocate_matrix(size_t height, size_t width) {
 		result[i] = (double*)malloc(sizeof(double) * width);
 
 		if (!result[i]) {
-			printf("Can't allocate memory for matrix row.");
+			printf("Can't allocate memory for matrix row.\n");
 			free_matrix(result, height);
 			return NULL;
 		}
@@ -48,5 +48,44 @@ double **read_matrix(size_t height, size_t width, FILE *input) {
 		}
 	}
 
+	return matrix;
+}
+
+double** generate_matrix_exp(size_t height) {
+	double alpha = 0.001;
+	double accum = 0;
+	double** matrix = allocate_matrix(height, height + 1);
+	for (size_t i = 0; i < height; i++) {
+		accum = 0;
+		for (size_t j = 0; j < height; j++) {
+			matrix[i][j] = exp(-alpha * (i - j) * (i - j));
+			accum += matrix[i][j] * (i + 1);
+		}
+		matrix[i][height] = accum;
+	}
+	return matrix;
+}
+
+double** generate_matrix_one(size_t height) {
+	double** matrix = allocate_matrix(height, height + 1);
+	for (size_t i = 0; i < height; i++) {
+		for (size_t j = 0; j < height; j++) {
+			if (j < i) {
+				matrix[i][j] = 0;
+			}
+			if (j == i) {
+				matrix[i][j] = 1.0;
+			}
+			if (j > i) {
+				matrix[i][j] = -1.0;
+			}
+		}
+		if (i == height - 1) {
+			matrix[i][height] = 1.0;
+		}
+		else {
+			matrix[i][height] = -1.0;
+		}
+	}
 	return matrix;
 }
