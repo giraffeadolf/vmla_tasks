@@ -1,0 +1,1 @@
+double determinant(double** matrix, size_t height, size_t width);

@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="det.cpp" />
     <ClCompile Include="gauss.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="read_matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="det.h" />
     <ClInclude Include="gauss.h" />
     <ClInclude Include="read_matrix.h" />
   </ItemGroup>
