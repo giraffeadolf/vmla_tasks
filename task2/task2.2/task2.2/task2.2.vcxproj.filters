@@ -34,6 +34,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="input_1.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="input_2.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
     <Text Include="input.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>

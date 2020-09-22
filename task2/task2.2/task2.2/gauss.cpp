@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void swap_rows(double** matrix, size_t n, size_t m) {
 	double* buffer = matrix[n];
@@ -8,21 +9,35 @@ void swap_rows(double** matrix, size_t n, size_t m) {
 	matrix[m] = buffer;
 }
 
-int search_nonzero(double** matrix, size_t height, size_t n) {
-	for (size_t i = n + 1; i < height; i++) {
-		if (matrix[i][n]) {
-			swap_rows(matrix, n, i);
-			return 0;
+int search_max(double** matrix, size_t height, size_t n, double *result) {
+	double max_value = matrix[n][n];
+	size_t max_index = n;
+
+	for (size_t i = n; i < height; i++) {
+		if (fabs(matrix[i][n]) > max_value) {
+			max_value = fabs(matrix[i][n]);
+			max_index = i;
 		}
+	}
+
+	if (matrix[max_index][n] != 0)
+	{
+		if (max_index != n)
+		{
+			swap_rows(matrix, n, max_index);
+			*result *= (-1);
+		}
+		return 0;
 	}
 
 	return 1;
 }
 
-void multiple_row_by_number(double** matrix, size_t width, size_t row, double num) {
+void multiple_row_by_number(double** matrix, size_t width, size_t row, double num, double *result) {
 	for (int i = 0; i < width; i++) {
 		matrix[row][i] *= num;
 	}
+	*result /= num;
 }
 
 // прибавляет строку с номером n к строке с номером m
@@ -32,61 +47,28 @@ void sum_rows(double** matrix, size_t width, size_t n, size_t m) {
 	}
 }
 
-double** upper_triangle(double** matrix, size_t height, size_t width) {
+double determinant(double** matrix, size_t height, size_t width) {
+	double result = 1.0;
+
 	for (size_t i = 0; i < height; i++) {
-		if (!matrix[i][i] && search_nonzero(matrix, height, i)) {
+		if (search_max(matrix, height, i, &result)) {
 			continue;
 		}
 
-		for (size_t j = i + 1; j < width - 1; j++) {
+		for (size_t j = i + 1; j < width; j++) {
 			if (!matrix[j][i]) {
 				continue;
 			}
 
-			multiple_row_by_number(matrix, width, i, -matrix[j][i] / matrix[i][i]);
+			multiple_row_by_number(matrix, width, i, -matrix[j][i] / matrix[i][i], &result);
 			sum_rows(matrix, width, j, i);
 		}
 	}
 
-	return matrix;
-}
-
-
-double* express_variables(double** matrix, size_t height, size_t width)
-{
-	double* solution = (double*)malloc((width - 1) * sizeof(double));
-	double value;
-
-	if (!solution)
+	for (size_t i = 0; i < height; i++)
 	{
-		printf("Can't allocate memory for solution\n");
-		return NULL;
+		result *= matrix[i][i];
 	}
 
-	// guess that height == width - 1
-
-	for (int i = height - 1; i >= 0; i--)
-	{
-		if (matrix[i][i] != 0)
-		{
-			value = matrix[i][width - 1];
-
-			for (size_t j = i + 1; j < width - 1; j++)
-			{
-				value -= matrix[i][j] * solution[j];
-			}
-
-			solution[i] = value / matrix[i][i];
-		}
-		else
-		{
-			printf("Can't solve (more than 1 solution or 0).\n");
-			free(solution);
-
-			return NULL;
-		}
-
-	}
-
-	return solution;
+	return result;
 }

@@ -53,21 +53,18 @@ double** read_matrix(size_t height, size_t width, FILE* input) {
 
 double** generate_matrix_exp(size_t height) {
 	double alpha = 0.001;
-	double accum = 0;
 	double** matrix = allocate_matrix(height, height + 1);
 	for (size_t i = 0; i < height; i++) {
-		accum = 0;
 		for (size_t j = 0; j < height; j++) {
 			matrix[i][j] = exp(-alpha * (i - j) * (i - j));
-			accum += matrix[i][j] * (i + 1);
 		}
-		matrix[i][height] = accum;
 	}
 	return matrix;
 }
 
 double** generate_matrix_one(size_t height) {
 	double** matrix = allocate_matrix(height, height + 1);
+
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < height; j++) {
 			if (j < i) {
@@ -80,12 +77,7 @@ double** generate_matrix_one(size_t height) {
 				matrix[i][j] = -1.0;
 			}
 		}
-		if (i == height - 1) {
-			matrix[i][height] = 1.0;
-		}
-		else {
-			matrix[i][height] = -1.0;
-		}
 	}
+
 	return matrix;
 }

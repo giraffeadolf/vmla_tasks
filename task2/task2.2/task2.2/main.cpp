@@ -7,41 +7,29 @@
 
 int main() {
 
-	//FILE* input = fopen("input.txt", "r");
-	//if (!input) {
-	//	printf("Can't open file\n");
-	//	return NULL;
-	//}
-	//
-	//size_t height, width;
-	//fscanf(input, "%zd %zd", &height, &width);
-	//
-	//if (height != width - 1)
-	//{
-	//	printf("Can't solve this.\n");
-	//	return 0;
-	//}
-	//
-	//double **matrix = read_matrix(height, width, input);
-	//fclose(input);
-	//
-	//if (!matrix) {
-	//	printf("Can't read matrix.\n");
-	//	return 1;
-	//}
-
-	size_t height = 100;
-	size_t width = height + 1;
-
-	double** matrix = generate_matrix_exp(height);
-
-	matrix = upper_triangle(matrix, height, width);
-	double* solution = express_variables(matrix, height, width);
-
-	if (!solution)
-	{
-		return 0;
+	FILE* input = fopen("input.txt", "r");
+	if (!input) {
+		printf("Can't open file\n");
+		return NULL;
 	}
+	
+	size_t height, width;
+	fscanf(input, "%zd %zd", &height, &width);
+	
+	double **matrix = read_matrix(height, width, input);
+	fclose(input);
+	
+	if (!matrix) {
+		printf("Can't read matrix.\n");
+		return 1;
+	}
+
+	//size_t height = 7;
+	//size_t width = height;
+
+	//double** matrix = generate_matrix_one(height);
+
+	double det = determinant(matrix, height, width);
 
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
@@ -49,15 +37,9 @@ int main() {
 		}
 		printf("\n");
 	}
-
-	printf("Solutions:\n");
-	for (size_t i = 0; i < height; i++)
-	{
-		printf("x%d = %lf\n", i + 1, solution[i]);
-	}
+	printf("%lf ", det);
 
 	free_matrix(matrix, height);
-	free(solution);
 
 	return 0;
 }
