@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void swap_rows(double** matrix, size_t n, size_t m) {
 	double* buffer = matrix[n];
@@ -8,12 +9,24 @@ void swap_rows(double** matrix, size_t n, size_t m) {
 	matrix[m] = buffer;
 }
 
-int search_nonzero(double** matrix, size_t height, size_t n) {
-	for (size_t i = n + 1; i < height; i++) {
-		if (matrix[i][n]) {
-			swap_rows(matrix, n, i);
-			return 0;
+int search_max(double** matrix, size_t height, size_t n) {
+	double max_value = matrix[n][n];
+	size_t max_index = n;
+
+	for (size_t i = n; i < height; i++) {
+		if (fabs(matrix[i][n]) > max_value) {
+			max_value = fabs(matrix[i][n]);
+			max_index = i;
 		}
+	}
+
+	if (matrix[max_index][n] != 0)
+	{
+		if (max_index != n)
+		{
+			swap_rows(matrix, n, max_index);
+		}
+		return 0;
 	}
 
 	return 1;
@@ -34,7 +47,7 @@ void sum_rows(double** matrix, size_t width, size_t n, size_t m) {
 
 double** upper_triangle(double** matrix, size_t height, size_t width) {
 	for (size_t i = 0; i < height; i++) {
-		if (!matrix[i][i] && search_nonzero(matrix, height, i)) {
+		if (search_max(matrix, height, i)) {
 			continue;
 		}
 
