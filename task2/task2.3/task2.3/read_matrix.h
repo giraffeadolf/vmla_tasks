@@ -10,6 +10,6 @@ double** read_matrix(size_t height, size_t width, FILE* input);
 
 double** generate_matrix_exp(size_t height);
 
-double** generate_matrix_one(size_t height);
+double** generate_matrix_lemer(size_t height);
 
 double** generate_E(size_t height);

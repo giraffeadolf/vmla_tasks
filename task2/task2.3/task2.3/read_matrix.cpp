@@ -51,30 +51,16 @@ double** read_matrix(size_t height, size_t width, FILE* input) {
 	return matrix;
 }
 
-double** generate_matrix_exp(size_t height) {
-	double alpha = 0.001;
-	double** matrix = allocate_matrix(height, height);
-	for (size_t i = 0; i < height; i++) {
-		for (size_t j = 0; j < height; j++) {
-			matrix[i][j] = exp(-alpha * (i - j) * (i - j));
-		}
-	}
-	return matrix;
-}
-
-double** generate_matrix_one(size_t height) {
+double** generate_matrix_lemer(size_t height) {
 	double** matrix = allocate_matrix(height, height);
 
-	for (size_t i = 0; i < height; i++) {
-		for (size_t j = 0; j < height; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < height; j++) {
 			if (j < i) {
-				matrix[i][j] = 0;
+				matrix[i][j] = ((j + 1) * 1.0) / ((i + 1) * 1.0);
 			}
-			if (j == i) {
-				matrix[i][j] = 1.0;
-			}
-			if (j > i) {
-				matrix[i][j] = -1.0;
+			if (j >= i) {
+				matrix[i][j] = ((i + 1) * 1.0) / ((j + 1) * 1.0);
 			}
 		}
 	}
@@ -99,3 +85,4 @@ double** generate_E(size_t height)
 
 	return matrix;
 }
+

@@ -50,6 +50,14 @@ void sum_rows(double** matrix, size_t width, size_t n, size_t m) {
 double determinant(double** matrix, size_t height, size_t width) {
 	double result = 1.0;
 
+	if (height == 1) {
+		return matrix[0][0];
+	}
+
+	if (height == 2) {
+		return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+	}
+
 	for (size_t i = 0; i < height; i++) {
 		if (search_max(matrix, height, i, &result)) {
 			continue;

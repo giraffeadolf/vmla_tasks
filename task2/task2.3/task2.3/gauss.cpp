@@ -60,14 +60,13 @@ void multiple_row_by_number(double** matrix, size_t width, size_t row, double nu
 int upper_triangle(double** matrix, double** result, size_t height, size_t width)
 {
 	for (size_t i = 0; i < height; i++) {
-		if (!search_nonzero_down(matrix, result, height, i)) {
+		if (search_nonzero_down(matrix, result, height, i)) {
 			return -1;
 		}
 
 		for (size_t j = i + 1; j < width; j++) {
 			if (!matrix[j][i]) {
-				return -1;
-				//continue;
+				continue;
 			}
 
 			multiple_row_by_number(result, width, i, -matrix[j][i] / matrix[i][i]);
@@ -85,7 +84,7 @@ int lower_triangle(double** matrix, double** result, size_t height, size_t width
 	int i = (int)(height - 1);
 
 	while (i >= 0) {
-		if (!search_nonzero_up(matrix, result, height, i)) {
+		if (search_nonzero_up(matrix, result, height, i)) {
 			return -1;
 			//continue;
 		}
@@ -94,7 +93,8 @@ int lower_triangle(double** matrix, double** result, size_t height, size_t width
 
 		while (j >= 0) {
 			if (!matrix[j][i]) {
-				return -1;
+				j--;
+				continue;
 			}
 
 			multiple_row_by_number(result, width, i, -matrix[j][i] / matrix[i][i]);
