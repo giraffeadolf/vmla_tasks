@@ -30,10 +30,10 @@ int main() {
 		return 1;
 	}
 
-	//size_t height = 100;
+	//size_t height = 10;
 	//size_t width = height + 1;
 
-	//double** matrix = generate_matrix_one(height);
+	//double** matrix = generate_matrix_exp(height);
 
 	matrix = upper_triangle(matrix, height, width);
 	double* solution = express_variables(matrix, height, width);
@@ -53,7 +53,7 @@ int main() {
 	printf("Solutions:\n");
 	for (size_t i = 0; i < height; i++)
 	{
-		printf("x%d = %lf\n", i + 1, solution[i]);
+		printf("x%d = %.10f\n", i + 1, solution[i]);
 	}
 
 	free_matrix(matrix, height);

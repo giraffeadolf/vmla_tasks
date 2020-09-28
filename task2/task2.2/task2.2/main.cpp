@@ -7,27 +7,27 @@
 
 int main() {
 
-	FILE* input = fopen("input.txt", "r");
-	if (!input) {
-		printf("Can't open file\n");
-		return NULL;
-	}
-	
-	size_t height, width;
-	fscanf(input, "%zd %zd", &height, &width);
-	
-	double **matrix = read_matrix(height, width, input);
-	fclose(input);
-	
-	if (!matrix) {
-		printf("Can't read matrix.\n");
-		return 1;
-	}
+	//FILE* input = fopen("input.txt", "r");
+	//if (!input) {
+	//	printf("Can't open file\n");
+	//	return NULL;
+	//}
+	//
+	//size_t height, width;
+	//fscanf(input, "%zd %zd", &height, &width);
+	//
+	//double **matrix = read_matrix(height, width, input);
+	//fclose(input);
+	//
+	//if (!matrix) {
+	//	printf("Can't read matrix.\n");
+	//	return 1;
+	//}
 
-	//size_t height = 7;
-	//size_t width = height;
+	size_t height = 100;
+	size_t width = height;
 
-	//double** matrix = generate_matrix_one(height);
+	double** matrix = generate_matrix_change(height);
 
 	double det = determinant(matrix, height, width);
 
