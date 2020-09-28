@@ -4,7 +4,6 @@
 
 #include "read_matrix.h"
 #include "gauss.h"
-#include "det.h"
 
 int main() {
 
