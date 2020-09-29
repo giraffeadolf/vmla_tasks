@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="read_matrix.h" />
-    <ClInclude Include="square_root_ method.h" />
+    <ClInclude Include="run_method.h" />
+    <ClInclude Include="square_root_method.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="read_matrix.cpp" />
+    <ClCompile Include="run_method.cpp" />
     <ClCompile Include="square_root_method.cpp" />
   </ItemGroup>
   <ItemGroup>
