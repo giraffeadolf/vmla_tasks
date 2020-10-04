@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
+    <ClCompile Include="reflection_method.cpp" />
     <ClCompile Include="rotation_method.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="matrix.h" />
+    <ClInclude Include="reflection_method.h" />
     <ClInclude Include="rotation_method.h" />
   </ItemGroup>
   <ItemGroup>

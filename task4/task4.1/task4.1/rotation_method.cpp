@@ -64,28 +64,35 @@ double* rotate(Matrix A, double* b)
 	double* tmp_1 = new double[A.dim()], * tmp_2 = new double[A.dim()];
 	double c, s;
 
-	for (size_t i = 1; i < A.dim(); i++)
+	for (size_t k = 1; k < A.dim(); k++)
 	{
-		c = A[1](1) / sqrt(A[1](1) * A[1](1) + A[i + 1](1) * A[i + 1](1));
-		s = A[i + 1](1) / sqrt(A[1](1) * A[1](1) + A[i + 1](1) * A[i + 1](1));
-
-		for (size_t j = 0; j < A.dim(); j++)
+		for (size_t i = k; i < A.dim(); i++)
 		{
-			tmp_1[j] = A[1](j + 1) * c + A[i + 1](j + 1) * s;
-			tmp_2[j] = A[1](j + 1) * (-s) + A[i + 1](j + 1) * c;
-		}
+			c = A[k](k) / sqrt(A[k](k) * A[k](k) + A[i + 1](k) * A[i + 1](k));
+			s = A[i + 1](k) / sqrt(A[k](k) * A[k](k) + A[i + 1](k) * A[i + 1](k));
 
-		double d = b[0];
-		b[0] = b[0] * c + b[i] * s;
-		b[i] = d * (-s) + b[i] * c;
+			for (size_t j = 0; j < A.dim(); j++)
+			{
+				tmp_1[j] = A[k](j + 1) * c + A[i + 1](j + 1) * s;
+				tmp_2[j] = A[k](j + 1) * (-s) + A[i + 1](j + 1) * c;
+			}
 
-		for (size_t j = 0; j < A.dim(); j++)
-		{
-			A[1][j + 1] = tmp_1[j];
-			A[i + 1][j + 1] = tmp_2[j];
+			double d = b[k - 1];
+			b[k - 1] = b[k - 1] * c + b[i] * s;
+			b[i] = d * (-s) + b[i] * c;
 
+			for (size_t j = 0; j < A.dim(); j++)
+			{
+				A[k][j + 1] = tmp_1[j];
+				A[i + 1][j + 1] = tmp_2[j];
+
+			}
+
+			//A.print();
 		}
 	}
+
+	A.print();
 
 	delete[] tmp_1;
 	delete[] tmp_2;

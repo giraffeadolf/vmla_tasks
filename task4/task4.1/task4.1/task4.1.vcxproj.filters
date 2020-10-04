@@ -24,12 +24,18 @@
     <ClCompile Include="rotation_method.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="reflection_method.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="matrix.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="rotation_method.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="reflection_method.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
