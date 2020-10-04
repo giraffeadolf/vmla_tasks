@@ -24,12 +24,18 @@
     <ClCompile Include="square_root_method.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="run_method.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="read_matrix.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="square_root_ method.h">
+    <ClInclude Include="run_method.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="square_root_method.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

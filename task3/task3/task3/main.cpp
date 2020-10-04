@@ -3,7 +3,8 @@
 #include <stdlib.h>
 
 #include "read_matrix.h"
-#include "square_root_ method.h"
+#include "square_root_method.h"
+#include "run_method.h"
 
 int main() {
 
@@ -30,8 +31,11 @@ int main() {
 		return 1;
 	}
 
-	double** T = represent_as_product(matrix, height);
-	double* solutions = solve(matrix, T, height);
+	double *solutions = run_method_3(matrix, height);
+
+	// метод квадратного корня
+	//double** T = represent_as_product(matrix, height);
+	//double* solutions = solve(matrix, T, height);
 
 	//size_t height = 10;
 	//size_t width = height + 1;
@@ -58,9 +62,9 @@ int main() {
 	{
 		printf("x%d = %lf\n", i + 1, solutions[i]);
 	}
-
+	
 	free_matrix(matrix, height);
-	free(solutions);
+	delete[] solutions;
 
 	return 0;
 }

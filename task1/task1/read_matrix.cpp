@@ -59,7 +59,7 @@ double** generate_matrix_exp(size_t height) {
 		accum = 0;
 		for (size_t j = 0; j < height; j++) {
 			matrix[i][j] = exp(-alpha * (i - j) * (i - j));
-			accum += matrix[i][j] * (i + 1);
+			accum += matrix[i][j];
 		}
 		matrix[i][height] = accum;
 	}
