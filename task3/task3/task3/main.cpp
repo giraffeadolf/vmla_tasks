@@ -8,34 +8,37 @@
 
 int main() {
 
-	FILE* input = fopen("input.txt", "r");
-	if (!input) {
-		printf("Can't open file\n");
-		return NULL;
-	}
+	//FILE* input = fopen("input.txt", "r");
+	//if (!input) {
+	//	printf("Can't open file\n");
+	//	return NULL;
+	//}
+	//
+	//size_t height, width;
+	//fscanf(input, "%zd %zd", &height, &width);
+	//
+	//if (height != width - 1)
+	//{
+	//	printf("Can't solve this.\n");
+	//	return 0;
+	//}
+	//
+	//double **matrix = read_matrix(height, width, input);
+	//fclose(input);
 	
-	size_t height, width;
-	fscanf(input, "%zd %zd", &height, &width);
-	
-	if (height != width - 1)
-	{
-		printf("Can't solve this.\n");
-		return 0;
-	}
-	
-	double **matrix = read_matrix(height, width, input);
-	fclose(input);
-	
-	if (!matrix) {
-		printf("Can't read matrix.\n");
-		return 1;
-	}
+	//if (!matrix) {
+	//	printf("Can't read matrix.\n");
+	//	return 1;
+	//}
 
-	double *solutions = run_method_3(matrix, height);
+	//double *solutions = run_method_3(matrix, height);
 
 	// метод квадратного корня
-	//double** T = represent_as_product(matrix, height);
-	//double* solutions = solve(matrix, T, height);
+	int height = 100;
+	double** matrix = generate_matrix_exp(height);
+
+	double** T = represent_as_product(matrix, height);
+	double* solutions = solve(matrix, T, height);
 
 	//size_t height = 10;
 	//size_t width = height + 1;
