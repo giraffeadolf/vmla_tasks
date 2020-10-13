@@ -30,7 +30,7 @@ int main() {
 	//	return 1;
 	//}
 
-	size_t height = 20;
+	size_t height = 100;
 	size_t width = height + 1;
 	
 	double** matrix = generate_matrix_exp(height);
@@ -53,7 +53,7 @@ int main() {
 	printf("Solutions:\n");
 	for (size_t i = 0; i < height; i++)
 	{
-		printf("x%d = %.30f\n", i + 1, solution[i]);
+		printf("x%d = %.20f\n", i + 1, solution[i]);
 	}
 
 	free_matrix(matrix, height);
