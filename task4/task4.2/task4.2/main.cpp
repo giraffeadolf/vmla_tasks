@@ -29,26 +29,6 @@ void round(Matrix& M, double accuracy)
     }
 }
 
-//double* express_variables(Matrix A, double* b)
-//{
-//    double* solution = new double[A.dim()];
-//
-//    for (int i = A.dim() - 1; i >= 0; i--)
-//    {
-//        double value = b[i];
-//
-//        for (int j = i - 1; j < A.dim(); j++)
-//        {
-//            value -= A[i](j) * solution[j];
-//        }
-//
-//        solution[i] = value / A[i](i);
-//
-//    }
-//
-//    return solution;
-//}
-
 double* express_variables(Matrix A, double *b)
 {
     double* solution = new double[A.dim()];
@@ -103,8 +83,6 @@ Matrix reflections(Matrix a, size_t i1) {
     for (int i = 0; i < tmp1.dim(); i++) {
         b[i] = tmp1[i][0];
     }
-    //print_vector(b, tmp1.dim());
-    //cout << endl;
 
     double b_length = getLength(b, tmp1.dim());
     double* b_ac = new double[tmp1.dim()];
@@ -115,22 +93,13 @@ Matrix reflections(Matrix a, size_t i1) {
 
     b_ac[0] = b[0] - b_length;
 
- /*   cout << b_length << endl;
-    print_vector(b_ac, tmp1.dim());
-    cout << endl;*/
-
    double b_b_ac = scalar_product(b_ac, b, tmp1.dim());
-    //cout << b_b_ac << endl;
 
     double* w = new double[tmp1.dim()];
 
     for (int i = 0; i < tmp1.dim(); i++) {
         w[i] = b_ac[i] / sqrt(2 * b_b_ac);
     }
-
-    //cout << "Vector w: " << endl;
-    //print_vector(w, tmp1.dim());
-    //cout << endl;
 
     Matrix uut(tmp1.dim());
 
@@ -140,14 +109,9 @@ Matrix reflections(Matrix a, size_t i1) {
         }
     }
 
-   /* cout << uut;
-    cout << endl;*/
-
     Matrix E(tmp1.dim());
     E = E - 2 * uut;
     Matrix result(a.dim());
-    //cout << E;
-    //cout << endl;
 
     size_t ei = 0;
     size_t ej = 0;
@@ -157,9 +121,6 @@ Matrix reflections(Matrix a, size_t i1) {
             result[i][j] = E[i - i1][j - i1];
         }
     }
-
-    //cout << result;
-    //cout << endl;
 
     return result;
 }
@@ -199,13 +160,6 @@ int main() {
     }
 
     fout.close();
-    //a.print();
-    //cout << endl;
-
-    //for (int i = 0; i < height; i++) {
-    //    cout << b[i] << " " << endl;
-    //}
-
 
     for (int i = 0; i < height; i++) {
         Matrix U(height - i);
