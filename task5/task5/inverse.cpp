@@ -7,7 +7,7 @@ using namespace std;
 
 int search_nonzero_down(Matrix& matrix, Matrix& result, size_t n) {
 	for (size_t i = n; i < matrix.dim(); i++) {
-		if (matrix[i][n]) {
+		if (matrix[i](n)) {
 			if (i != n)
 			{
 				matrix.sum_rows(n, i);
@@ -16,13 +16,13 @@ int search_nonzero_down(Matrix& matrix, Matrix& result, size_t n) {
 			return 0;
 		}
 
-		return 1;
 	}
+	return 1;
 }
 
 int search_nonzero_up(Matrix& matrix, Matrix& result, size_t n) {
 	for (int i = (int)n; i >= 0; i--) {
-		if (matrix[i][n]) {
+		if (matrix[i](n)) {
 			if (i != n)
 			{
 				matrix.sum_rows(n, i);
@@ -30,9 +30,8 @@ int search_nonzero_up(Matrix& matrix, Matrix& result, size_t n) {
 			}
 			return 0;
 		}
-
-		return 1;
 	}
+	return 1;
 }
 
 void multiple_row_by_number(Matrix& matrix, size_t row, double num)
@@ -42,7 +41,7 @@ void multiple_row_by_number(Matrix& matrix, size_t row, double num)
 	}
 }
 
-int upper_triangle(Matrix& matrix, Matrix result)
+int upper_triangle(Matrix& matrix, Matrix& result)
 {
 	for (size_t i = 0; i < matrix.dim(); i++) {
 		if (search_nonzero_down(matrix, result, i)) {
@@ -50,12 +49,12 @@ int upper_triangle(Matrix& matrix, Matrix result)
 		}
 
 		for (size_t j = i + 1; j < matrix.dim(); j++) {
-			if (!matrix[j][i]) {
+			if (!matrix[j](i)) {
 				continue;
 			}
 
-			multiple_row_by_number(result, i, -matrix[j][i] / matrix[i][i]);
-			multiple_row_by_number(matrix, i, -matrix[j][i] / matrix[i][i]);
+			multiple_row_by_number(result, i, -matrix[j](i) / matrix[i](i));
+			multiple_row_by_number(matrix, i, -matrix[j](i) / matrix[i](i));
 			matrix.sum_rows(j, i);
 			result.sum_rows(j, i);
 		}
@@ -76,13 +75,13 @@ int lower_triangle(Matrix& matrix, Matrix& result)
 		int j = i - 1;
 
 		while (j >= 0) {
-			if (!matrix[j][i]) {
+			if (!matrix[j](i)) {
 				j--;
 				continue;
 			}
 
-			multiple_row_by_number(result, i, -matrix[j][i] / matrix[i][i]);
-			multiple_row_by_number(matrix, i, -matrix[j][i] / matrix[i][i]);
+			multiple_row_by_number(result, i, -matrix[j](i) / matrix[i](i));
+			multiple_row_by_number(matrix, i, -matrix[j](i) / matrix[i](i));
 			matrix.sum_rows(j, i);
 			result.sum_rows(j, i);
 			j--;
@@ -99,6 +98,7 @@ Matrix inverse(Matrix& matrix) {
 	Matrix result(matrix.dim());
 
 	int status = upper_triangle(matrix, result);
+
 	if (status == -1)
 	{
 		cout << "Det = 0" << endl;
@@ -108,8 +108,8 @@ Matrix inverse(Matrix& matrix) {
 
 	for (size_t i = 0; i < matrix.dim(); i++)
 	{
-		multiple_row_by_number(result, i, 1 / matrix[i][i]);
-		multiple_row_by_number(matrix, i, 1 / matrix[i][i]);
+		multiple_row_by_number(result, i, 1 / matrix[i](i));
+		multiple_row_by_number(matrix, i, 1 / matrix[i](i));
 	}
 
 	return result;
