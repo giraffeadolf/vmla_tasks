@@ -65,9 +65,15 @@ double* multiply_b(Matrix M, double* b)
 }
 
 
-double* iteration(Matrix M, Matrix inversed, double* x_prev, double* b) 
+double* iteration(Matrix M, Matrix inversed, double* x_prev, double* b)
 {
+    double w = 1.5;
     double* Ax_prev = multiply_b(M, x_prev);
+    double* x_prev_copy = new double[M.dim()];
+    for (int i = 0; i < M.dim(); i++) {
+        x_prev_copy[i] = x_prev[i];
+    }
+
 
     for (size_t k = 0; k < M.dim(); k++)
     {
@@ -79,10 +85,13 @@ double* iteration(Matrix M, Matrix inversed, double* x_prev, double* b)
     for (size_t i = 0; i < M.dim(); i++)
     {
         x_prev[i] -= tmp[i];
+        x_prev[i] *= w;
+        x_prev[i] += (1 - w) * x_prev_copy[i];
     }
 
     delete[] Ax_prev;
     delete[] tmp;
+    delete[] x_prev_copy;
 
     return x_prev;
 }
@@ -133,7 +142,7 @@ double* solve(Matrix M, double* b)
         x[i] = 1;
     }
 
-    double epsilon = pow(10, -9);
+    double epsilon = pow(10, -5);
 
     while (true)
     {
@@ -176,7 +185,7 @@ int main()
 
     fout.close();*/
 
-    double * solution = solve(a, b);
+    double* solution = solve(a, b);
     cout << endl;
 
     for (int i = 0; i < height; i++)
@@ -187,5 +196,5 @@ int main()
 
     delete[] b;
     delete[] solution;
-	return 0;
+    return 0;
 }

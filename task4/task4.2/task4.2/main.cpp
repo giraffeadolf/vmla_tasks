@@ -7,6 +7,34 @@
 
 using namespace std;
 
+Matrix generate_matrix_exp(size_t height) {
+    double alpha = 10;
+
+    Matrix matrix(height);
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < height; j++) {
+            matrix[i][j] = exp(-alpha * abs((i - j) * (i - j)));
+
+        }
+    }
+
+    return matrix;
+}
+
+double* generate_matrix_exp_b(Matrix m) {
+
+    double* b = new double[m.dim()];
+    for (int i = 0; i < m.dim(); i++) {
+        b[i] = 0;
+        for (int j = 0; j < m.dim(); j++) {
+            b[i] += m[i](j);
+        }
+    }
+
+    return b;
+}
+
 double scalar_product(double* a, double* b, size_t height) {
     double sum = 0;
     for (int i = 0; i < height; i++) {
@@ -146,29 +174,31 @@ double* multiply_b(Matrix M, double* b)
 
 
 int main() {
-    ifstream fout("input.txt");
-    size_t height;
+    //ifstream fout("input.txt");
+   size_t height = 10;
 
-    fout >> height;
+    //fout >> height;
     Matrix a(height);
-    fout >> a;
+    a = generate_matrix_exp(height);
+    //fout >> a;
 
     double* b = new double[height];
+    b = generate_matrix_exp_b(a);
 
-    for (int i = 0; i < height; i++) {
-        fout >> b[i];
-    }
+    //for (int i = 0; i < height; i++) {
+    //    fout >> b[i];
+    //}
 
-    fout.close();
+    //fout.close();
 
-    for (int i = 0; i < height; i++) {
+    for (int i = 0; i < height - 1; i++) {
         Matrix U(height - i);
         U = reflections(a, i);
         a = U * a;
         b = multiply_b(U, b);
     }
 
-    round(a, pow(10, -9));
+    //round(a, pow(10, -9));
 
     double* solution = express_variables(a, b);
     print_vector(solution, a.dim());
