@@ -1,4 +1,4 @@
 #pragma once
 #include "matrix.h"
 
-void solve(Matrix A);
+double find_max_eigenvalue(Matrix A);

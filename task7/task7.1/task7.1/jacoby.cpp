@@ -121,7 +121,7 @@ bool check(Matrix A)
 }
 
 
-void solve(Matrix A)
+double find_max_eigenvalue(Matrix A)
 {
 	while (true)
 	{
@@ -146,9 +146,21 @@ void solve(Matrix A)
 
 		A = (~G) * A * G;
 
-		A.print();
 	}
 
 	A = turn_zero(A);
-	A.print();
+
+	double max_eigenvalue = A[0](0);
+	//double min_eigenvalue = A[0](0);
+
+	for (size_t i = 1; i < A.dim(); i++)
+	{
+		if (fabs(A[i](i)) > fabs(max_eigenvalue))
+		{
+			max_eigenvalue = A[i](i);
+		}
+
+	}
+
+	return max_eigenvalue;
 }
