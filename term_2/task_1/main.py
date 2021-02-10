@@ -6,7 +6,6 @@ def bisections(func, a, b, epsilon):
 
     while b - a > epsilon:
         cnt += 1
-        # print(cnt)
 
         c = (a + b) / 2
 
@@ -46,7 +45,7 @@ def fixed_point_iteration(func, a, epsilon, newton=False, sor=False):
         while abs(x_curr - g(x_curr)) > epsilon and cnt < cnt_max:
             x_curr = g(x_curr)
             cnt += 1
-            # print(x_curr)
+            print(x_curr)
     except OverflowError:
         return "Method doesn't converge (overflow error)"
 
@@ -57,13 +56,13 @@ def fixed_point_iteration(func, a, epsilon, newton=False, sor=False):
 
 
 # bisections
-# print(bisections(lambda x: x**3 - 8, -10, 53, epsilon=10 ** (-9)))
+# print(bisections(lambda x: math.log(x), 1/2, 10, epsilon=10 ** (-9)))
 
 # fixed point iteration
-print(fixed_point_iteration(lambda x: x**3 - 8 + math.sin(x), 50, epsilon=10**(-9)))
+# print(fixed_point_iteration(lambda x: x**3, 1.3, epsilon=10**(-9)))
 
 # newton method
-print(fixed_point_iteration(lambda x: x**3 - 8 + math.sin(x), 50, epsilon=10**(-9), newton=True))
+# print(fixed_point_iteration(lambda x: math.cos(x) - x**3, 1/2, epsilon=10**(-9), newton=True))
 
 # sor
-print(fixed_point_iteration(lambda x: x**3 - 8 + math.sin(x), 50, epsilon=10**(-9), sor=True))
+# print(fixed_point_iteration(lambda x: x**3 - 8 + math.sin(x), 50, epsilon=10**(-9), sor=True))
