@@ -3,6 +3,7 @@ import builtins
 
 golden = (1 + 5 ** 0.5) / 2
 
+
 def bisections(func, a, b, epsilon):
     cnt = 0
 
@@ -24,6 +25,7 @@ def bisections(func, a, b, epsilon):
 def derivative(func, x, epsilon):
     return (func(x + epsilon) - func(x)) / epsilon
 
+
 def find_extr(func, a, b, epsilon, max=False, min=False):
     a_0 = a
     b_0 = b
@@ -41,6 +43,7 @@ def find_extr(func, a, b, epsilon, max=False, min=False):
             else:
                 b = x_2
     return builtins.max(func(a_0), func(b_0), func((a + b) / 2)) if max else builtins.min(func(a_0), func(b_0), func((a + b) / 2))
+
 
 def sor(func, x_0, a, b, epsilon):
     cnt = 0
@@ -69,6 +72,7 @@ def sor(func, x_0, a, b, epsilon):
         return "Method doesn't converge"
 
     return f"\nSolution: {x_curr}\nIterations: {cnt}"
+
 
 def fixed_point_iteration(func, x_0, epsilon, newton=False):
     sgn = 1 if derivative(func, x_0, 10**(-9)) > 0 else -1
