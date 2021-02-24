@@ -83,14 +83,8 @@ def fixed_point_iteration(func, x_0, epsilon, newton=False):
     try:
         if newton:
             g = lambda x: x - (1 / derivative(func, x, 10**(-9))) * func(x)
-        elif sor:
-            df = lambda x: derivative(func, x, epsilon=10 ** (-9))
-            maximum = find_extr(df, a, b, epsilon=10**(-9), max=True)
-            minimum = find_extr(df, a, b, epsilon=10**(-9), min=True)
-            tau = 2 / (maximum + minimum)
-            g = lambda x: x - tau*func(x)
         else:
-            g = lambda x: x - (1 / derivative(func, x_0, 10 ** (-9))) * func(x)
+            g = lambda x: x - func(x)
     except OverflowError:
         return "Method doesn't converge (overflow error)"
 
